@@ -157,3 +157,9 @@ The model is automatically evaluated during training. Test results include:
 - **Loss**: Validation loss
 
 Results are saved in `test_results.txt` for each fold.
+
+## How to run the app
+
+- The app is dockerized, so if you want to run it, download the pre-trained model and place it in the same diretory level with the app.py file
+- Then run this command docker-compose up --build
+- After that, get access to the link http://172.21.0.3:3000

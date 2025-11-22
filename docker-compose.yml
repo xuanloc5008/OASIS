@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oasis_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Map the Models folder so you can edit code without rebuilding
+      - ./Models:/app/Models
+      - ./app.py:/app/app.py
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: oasis_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      # This tells the browser where the API is.
+      # Since the browser runs on your host machine, it uses localhost:8000
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
